@@ -1,0 +1,16 @@
+---
+  - name: add default gateway for centralServer
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: DEFROUTE=no
+
+  - name: add default gateway for centralServer
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+      line: GATEWAY=192.168.0.1
+
+  - name: Restart network
+    systemd:
+      name: network
+      state: restarted
+...

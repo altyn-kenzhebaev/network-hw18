@@ -1,0 +1,22 @@
+---
+  - name: add default gateway for office2Router
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: DEFROUTE=no
+
+  - name: add default gateway for office2Router
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+      line: GATEWAY=192.168.255.9
+
+  - name: Restart network
+    systemd:
+      name: network
+      state: restarted
+
+  - name: Set up forward packages across routers
+    sysctl:
+      name: net.ipv4.conf.all.forwarding
+      value: '1'
+      state: present
+...

@@ -1,0 +1,8 @@
+---
+- name: inetRouter | Configure inetRouter
+  hosts: inetRouter
+  gather_facts: no
+  become: true
+  roles:
+    - inetRouter
+...

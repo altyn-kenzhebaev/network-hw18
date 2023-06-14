@@ -1,0 +1,8 @@
+---
+- name: Configure office1Server
+  hosts: office1Server
+  gather_facts: no
+  become: true
+  roles:
+    - office1Server
+...

@@ -1,0 +1,38 @@
+---
+  - name: add default gateway for centralRouter
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+      line: DEFROUTE=no
+
+  - name: add default gateway for centralRouter
+    lineinfile:
+      dest: /etc/sysconfig/network-scripts/ifcfg-eth1
+      line: GATEWAY=192.168.255.1
+
+  - name: Set up route on inetRouter eth5
+    copy:
+      dest: /etc/sysconfig/network-scripts/route-eth5
+      src: centralRouter_route_eth5
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Set up route on inetRouter eth6
+    copy:
+      dest: /etc/sysconfig/network-scripts/route-eth6
+      src: centralRouter_route_eth6
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Restart network
+    systemd:
+      name: network
+      state: restarted
+
+  - name: Set up forward packages across routers
+    sysctl:
+      name: net.ipv4.conf.all.forwarding
+      value: '1'
+      state: present
+...

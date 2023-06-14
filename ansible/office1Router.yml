@@ -1,0 +1,8 @@
+---
+- name: Configure office1Router
+  hosts: office1Router
+  gather_facts: no
+  become: true
+  roles:
+    - office1Router
+...
